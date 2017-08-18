@@ -16,9 +16,8 @@ public class GuestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context context;
     private Cursor cursor;
 
-    public GuestAdapter(Context context, Cursor cursor) {
+    public GuestAdapter(Context context) {
         this.context = context;
-        this.cursor = cursor;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class GuestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        return cursor == null ? 0 : cursor.getCount();
     }
 
     public void swapCursor(Cursor cursor) {

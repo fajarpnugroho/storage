@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <provider
+                android:name=".provider.GuestContentProvider"
+                android:authorities="com.pockettravel.guestbook.items"
+                android:exported="false"/>
+
     </application>
 
 </manifest>
