@@ -62,6 +62,13 @@ public class GuestContentProvider extends ContentProvider {
             case ITEM_LIST:
                 builder.setTables(GuestContract.Guest.TABLE_NAME);
                 break;
+            case ITEM_ID:
+                builder.setTables(GuestContract.Guest.TABLE_NAME);
+                String idString = uri.getLastPathSegment();
+                selection = GuestContract.Guest._ID + "=" + idString;
+                break;
+            default:
+                throw new IllegalStateException("Unknown uri " + uri);
         }
 
         Cursor cursor = builder.query(db, projection, selection, selectionArgs,

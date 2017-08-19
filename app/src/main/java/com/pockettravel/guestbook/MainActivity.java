@@ -1,6 +1,7 @@
 package com.pockettravel.guestbook;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import com.pockettravel.guestbook.db.GuestContract;
 import com.pockettravel.guestbook.provider.GuestContentProviderContract;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        LoaderManager.LoaderCallbacks<Cursor> {
+        LoaderManager.LoaderCallbacks<Cursor>,GuestAdapter.ItemClickListener {
 
     private static final int TASK_LOADER_ID = 0;
     private static final String TAG = "MainActivity";
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        guestAdapter = new GuestAdapter(this);
+        guestAdapter = new GuestAdapter(this, this);
         recyclerView.setAdapter(guestAdapter);
 
         ItemTouchHelper touchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -108,5 +109,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         guestAdapter.swapCursor(null);
+    }
+
+    @Override
+    public void onItemClick(long id) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_ID, id);
+        startActivity(intent);
     }
 }
