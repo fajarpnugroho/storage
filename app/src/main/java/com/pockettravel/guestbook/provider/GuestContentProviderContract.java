@@ -11,29 +11,29 @@ public class GuestContentProviderContract {
 
     public static final String AUTHORITY = "com.pockettravel.guestbook.items";
 
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
-    public static interface CommonColumns extends BaseColumns {
-    }
-
-    public static final class Items implements CommonColumns {
+    public static final class Items implements BaseColumns {
         /**
          * The content URI for this table.
          */
         public static final Uri CONTENT_URI =
-                Uri.withAppendedPath(GuestContentProviderContract.CONTENT_URI, "items");
+                Uri.withAppendedPath(GuestContentProviderContract.BASE_CONTENT_URI,
+                        "items");
 
         /**
          * The mime type of a directory of items.
          */
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.de.com.pockettravel.guestbook.guest_items";
+                ContentResolver.CURSOR_DIR_BASE_TYPE
+                        + "/vnd.com.pockettravel.guestbook.guest_items";
 
         /**
          * The mime type of a single item.
          */
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.de.com.pockettravel.guestbook.guest_items";
+                ContentResolver.CURSOR_ITEM_BASE_TYPE
+                        + "/vnd.com.pockettravel.guestbook.guest_items";
 
         /**
          * A projection of all columns

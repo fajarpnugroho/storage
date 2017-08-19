@@ -75,11 +75,6 @@ public class GuestContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        if (URI_MATCHER.match(uri) != ITEM_LIST) {
-            throw new IllegalArgumentException(
-                    "Unsupported URI for insertion: " + uri);
-        }
-
         Uri itemUri;
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
